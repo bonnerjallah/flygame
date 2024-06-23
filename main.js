@@ -49,8 +49,8 @@ class Game {
         window.addEventListener('resize', this.onWindowResize.bind(this))
 
         //controler event listner
-        window.addEventListener("onkeydown", this.keydown.bind(this))
-        window.addEventListener('onkeyup', this.keyUp.bind(this))
+        window.addEventListener("keydown", this.keydown.bind(this))
+        window.addEventListener('keyup', this.keyUp.bind(this))
 
         this.spaceKey = false;
 
@@ -135,7 +135,7 @@ class Game {
 
     //Controller
     keydown(event){
-        switch(event.keycode) {
+        switch(event.keyCode) {
             case 32: 
                 this.spaceKey = true
                 break
@@ -143,7 +143,7 @@ class Game {
     }
 
     keyUp(event){
-        switch(event.keycode) {
+        switch(event.keyCode) {
             case 32:
                 this.spaceKey = false
                 break
@@ -201,11 +201,11 @@ class Game {
 
     //update camera method
     updateCamera(){
-        this.cameraController.position.copy(this.plane);
+        this.cameraController.position.copy( this.plane.position );
         this.cameraController.position.y = 0;
         this.cameraTarget.copy(this.plane.position);
         this.cameraTarget.z += 6;
-        this.camera.lookAt(this.cameraTarget)
+        this.camera.lookAt( this.cameraTarget );
     }
 
     //window resize method
@@ -236,6 +236,11 @@ class Game {
 
 
         this.plane.update(time);
+
+        if(this.active){
+            this.updateCamera()
+            // this.obstacles.update(this.plane.position, time)
+        }
 
 
 
