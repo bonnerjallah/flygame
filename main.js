@@ -3,6 +3,7 @@ import './style.css'
 import * as THREE from "three";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { Plane } from './plane.js';
+import { Obstacles } from './obstacles.js';
 
 
 class Game {
@@ -81,6 +82,7 @@ class Game {
         livesElem.innerHTML = this.lives;
 
         this.plane.reset();
+        this.Obstacles.reset();
 
         this.active = true;
 
@@ -130,6 +132,7 @@ class Game {
         //this.loadingBar.visible = true;
 
         this.plane = new Plane(this)
+        this.Obstacles = new Obstacles(this)
 
     }
 
@@ -194,9 +197,11 @@ class Game {
 
         elem.innerHTML = this.lives
 
-        if(this.lives === 0) setTimeout(() => {
-            this.gameOver.bind(this)
-        }, 1200)
+        if(this.lives == 0) {
+            setTimeout(() => {
+                this.gameOver()
+            },1000)
+        } 
     }
 
     //update camera method
@@ -239,10 +244,8 @@ class Game {
 
         if(this.active){
             this.updateCamera()
-            // this.obstacles.update(this.plane.position, time)
+            this.Obstacles.update(this.plane.position, dt)
         }
-
-
 
         this.renderer.render(this.scene, this.camera)
     }

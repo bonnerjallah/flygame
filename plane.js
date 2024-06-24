@@ -8,12 +8,12 @@ class Plane{
         this.game = game;
         this.scene = game.scene;
         this.load();
-        this.timPos = new Vector3();
+        this.tmpPos = new Vector3(); //This initialization prepares tmpPos to hold and manipulate positions in 3D space.
     }
 
     get position(){
-        if(this.plane !== undefined) this.plane.getWorldPosition(this.timPos);
-        return this.timPos;
+        if(this.plane !== undefined) this.plane.getWorldPosition(this.tmpPos);
+        return this.tmpPos;
     }
 
     set visible(mode){
@@ -65,13 +65,14 @@ class Plane{
         );
     }
 
+    //call by startgame method of the game class in main file
     reset(){
         this.plane.position.set(0, 0, 0);
         this.plane.visible = true;
         this.velocity.set(0, 0, 0.1)
     }
 
-     update(time){
+    update(time){
         if(!this.plane) return
         if (this.propeller !== undefined) this.propeller.rotateZ(1);
 
