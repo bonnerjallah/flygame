@@ -55,7 +55,7 @@
         }
         #info{
             position: absolute;
-            top: 0;
+            top: 0px;
             left: 0;
             width: 100%;
             font-family: 'RocknRoll One', sans-serif;
@@ -67,12 +67,18 @@
         #life{
         position: absolute;
         left: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         }
         #score-panel{
         position: absolute;
         top: 0;
         right: 20px;
         float: right;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         }
         #lives{
             display: inline;
@@ -89,12 +95,14 @@
     <title>Lecture 5.6</title>
 </head>
 <body>
-    <p id="instructions">Collect stars. <br>Avoid bombs. <br>Spacebar, mousedown or touch to climb</p>
+    <p id="instructions">Collect fuel cans. <br>Avoid bombs. <br>Spacebar, mousedown or touch to climb</p>
     <div id="info">
         <div id="life">
+            <p>Lives</p>
             <div id="lives">3</div>
         </div>
         <div id="score-panel">
+            <p>Score</p>
             <div id="score">0</div>
         </div>
     </div>

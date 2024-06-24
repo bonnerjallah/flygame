@@ -152,7 +152,7 @@ class Obstacles {
         if (obj.name === 'gas') {
             this.game.incScore();
         } else {
-            this.explosions.push(new Explosion(obj, this));
+            // this.explosions.push(new Explosion(obj, this));
             this.game.decLives();
         }
         obj.visible = false;

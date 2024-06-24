@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { Plane } from './plane.js';
 import { Obstacles } from './obstacles.js';
+import { SFX } from './Sounds.js';
 
 
 class Game {
@@ -86,6 +87,8 @@ class Game {
 
         this.active = true;
 
+        this.sfx.play("engine")
+
     }
 
     gameOver(){
@@ -99,6 +102,9 @@ class Game {
         btn.style.display = 'block';
 
         this.plane.visible = false;
+
+        this.sfx.stopAll();
+        this.sfx.play("gameover")
     }
 
     reset(){
@@ -133,6 +139,8 @@ class Game {
 
         this.plane = new Plane(this)
         this.Obstacles = new Obstacles(this)
+
+        this.loadSFX()
 
     }
 
@@ -176,6 +184,17 @@ class Game {
 
     }
 
+    //load sfx function
+    loadSFX(){
+        this.sfx = new SFX(this.camera, this.assetsPath + 'plane/');
+
+        this.sfx.load('explosion');
+        this.sfx.load('engine', true);
+        this.sfx.load('gliss');
+        this.sfx.load('gameover');
+        this.sfx.load('bonus');
+    }
+
     //score increment method
     incScore(){
         this.score ++;
@@ -187,6 +206,8 @@ class Game {
         }
 
         elem.innerHTML = this.score + this.bonusScore;
+
+        this.sfx.play("gliss")
     }
 
     //life decrement method
@@ -202,6 +223,8 @@ class Game {
                 this.gameOver()
             },1000)
         } 
+
+        this.sfx.play("explosion")
     }
 
     //update camera method
